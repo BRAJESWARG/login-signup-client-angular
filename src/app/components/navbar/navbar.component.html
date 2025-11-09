@@ -1,6 +1,7 @@
 <nav class="navbar">
   <a routerLink="/">Home</a>
-  <a routerLink="/login">Login</a>
-  <a routerLink="/signup">Signup</a>
+  <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+  <a *ngIf="!isLoggedIn" routerLink="/signup">Signup</a>
+  <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
 </nav>
 <hr>

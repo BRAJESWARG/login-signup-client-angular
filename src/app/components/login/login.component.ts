@@ -10,11 +10,12 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   onLogin() {
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     if (userData.email === this.email && userData.password === this.password) {
+      localStorage.setItem('isLoggedIn', 'true');
       alert('Login Successful!');
       this.router.navigate(['/']);
     } else {
