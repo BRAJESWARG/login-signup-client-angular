@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -7,19 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email = '';
+  username = '';
   password = '';
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
+
 
   onLogin() {
-    const userData = JSON.parse(localStorage.getItem('user') || '{}');
-    if (userData.email === this.email && userData.password === this.password) {
-      localStorage.setItem('isLoggedIn', 'true');
-      alert('Login Successful!');
-      this.router.navigate(['/']);
-    } else {
-      alert('Invalid credentials');
-    }
+    this.http.post<any>('http://localhost:8040/login', { username: this.username, password: this.password })
+      .subscribe({
+        next: (res) => {
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/home']).then(() => {
+            window.location.reload(); // 🔄 Refresh navbar state
+          });
+        },
+        error: (err) => {
+          alert('Invalid username or password');
+        }
+      });
   }
+
 }

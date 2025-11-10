@@ -1,2 +1,8 @@
-<app-navbar></app-navbar>
+<nav class="navbar">
+    <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+    <a routerLink="/signup" *ngIf="!isLoggedIn">Signup</a>
+    <a routerLink="/home" *ngIf="isLoggedIn">Home</a>
+    <button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+</nav>
+
 <router-outlet></router-outlet>

@@ -1,1 +1,138 @@
-/* You can add global styles to this file, and also import other style files */
+/* 🌐 Global Reset and Font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f6f8fa;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* 🧭 Navbar */
+nav.navbar {
+    background-color: #002b5c;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav.navbar a,
+nav.navbar button {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav.navbar a:hover,
+nav.navbar button:hover {
+    color: #00b4d8;
+}
+
+nav.navbar button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 🧱 Centered Card Layout */
+.container {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    padding: 2.5rem;
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* 📝 Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* 🎯 Button Styling */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 💬 Text Links */
+p {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* 🎬 Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 📱 Responsive */
+@media (max-width: 480px) {
+    .card {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}

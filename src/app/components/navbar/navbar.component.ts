@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +10,18 @@ import { Router, NavigationEnd } from '@angular/router';
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
 
-  constructor(private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    // Recheck login status on every route change
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        this.isLoggedIn = this.auth.isLoggedIn();
       }
     });
   }
 
   logout() {
-    localStorage.removeItem('isLoggedIn');
+    this.auth.logout();
     alert('Logged out successfully!');
     this.router.navigate(['/login']);
   }
