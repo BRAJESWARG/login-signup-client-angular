@@ -13,10 +13,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.checkLoginStatus();
+
+    // 👇 Still keep this for cross-tab sync
+    window.addEventListener('storage', () => this.checkLoginStatus());
   }
 
   checkLoginStatus() {
     this.isLoggedIn = !!localStorage.getItem('token');
+  }
+
+  // 👇 Add a public method to trigger navbar refresh manually
+  refreshNavbar() {
+    this.checkLoginStatus();
   }
 
   logout() {

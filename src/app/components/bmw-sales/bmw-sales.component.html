@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>🏎️ BMW Showroom Sales</h2>
+
+    <div class="add-form">
+        <input [(ngModel)]="newSale.model_name" placeholder="Model Name" />
+        <input [(ngModel)]="newSale.year" type="number" placeholder="Year" />
+        <input [(ngModel)]="newSale.units_sold" type="number" placeholder="Units Sold" />
+        <input [(ngModel)]="newSale.revenue" type="number" placeholder="Revenue" />
+        <button (click)="addSale()">Add</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Units Sold</th>
+                <th>Revenue ($)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sale of sales">
+                <td><input [(ngModel)]="sale.model_name" /></td>
+                <td><input [(ngModel)]="sale.year" type="number" /></td>
+                <td><input [(ngModel)]="sale.units_sold" type="number" /></td>
+                <td><input [(ngModel)]="sale.revenue" type="number" /></td>
+                <td>
+                    <button (click)="updateSale(sale)">💾 Save</button>
+                    <button (click)="deleteSale(sale.id!)">🗑️ Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

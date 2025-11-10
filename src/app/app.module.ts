@@ -8,9 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BmwSalesComponent } from './components/bmw-sales/bmw-sales.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignupComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, SignupComponent, HomeComponent, BmwSalesComponent],
   imports: [
     BrowserModule,
     FormsModule,

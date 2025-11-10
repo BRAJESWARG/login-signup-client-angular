@@ -1,28 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-  isLoggedIn = false;
+export class NavbarComponent {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.isLoggedIn = this.auth.isLoggedIn();
-      }
-    });
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token'); // true if token exists
   }
 
-  logout() {
-    this.auth.logout();
-    alert('Logged out successfully!');
+  logout(): void {
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 }

@@ -14,17 +14,17 @@ export class SignupComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser() {
-    const payload = { username: this.username, password: this.password };
-
-    this.http.post<any>('http://localhost:8040/register', payload).subscribe({
+    this.http.post<any>('http://localhost:8040/auth/register', {   // 👈 FIXED URL
+      username: this.username,
+      password: this.password
+    }).subscribe({
       next: (res) => {
-        console.log('✅ Registration successful:', res);
-        alert('User registered successfully!');
+        alert('✅ Registration successful! Please login.');
         this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('❌ Registration failed:', err);
-        alert('Registration failed! Please check backend or try again.');
+        alert('Registration failed. Please try again.');
       }
     });
   }
