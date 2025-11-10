@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,30 +8,24 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  username = '';
-  password = '';
+  username: string = '';
+  password: string = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  onSignup(): void {
-    this.http.post<{ token: string }>('http://localhost:8040/register', {
-      username: this.username,
-      password: this.password
-    })
-      .subscribe({
-        next: (res: { token: string }) => {
-          localStorage.setItem('token', res.token);
-          this.router.navigate(['/home']).then(() => {
-            window.location.reload(); // Refresh navbar state
-          });
-        },
-        error: (err: any) => {
-          if (err.status === 409) {
-            alert('Username already exists!');
-          } else {
-            alert('Registration failed');
-          }
-        }
-      });
+  registerUser() {
+    const payload = { username: this.username, password: this.password };
+
+    this.http.post<any>('http://localhost:8040/register', payload).subscribe({
+      next: (res) => {
+        console.log('✅ Registration successful:', res);
+        alert('User registered successfully!');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('❌ Registration failed:', err);
+        alert('Registration failed! Please check backend or try again.');
+      }
+    });
   }
 }

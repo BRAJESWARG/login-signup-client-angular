@@ -1,13 +1,11 @@
 <div class="container">
-  <h2>Sign Up</h2>
-  <form (ngSubmit)="onSignup()" #signupForm="ngForm">
-    <input type="text" name="username" [(ngModel)]="username" placeholder="Username" required />
-    <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required minlength="6" />
-    <button type="submit" [disabled]="!signupForm.valid">Create Account</button>
-  </form>
-
-  <p>
-    Already have an account?
-    <a routerLink="/login">Login here</a>
-  </p>
+  <div class="card">
+    <h2>Create Account</h2>
+    <form (ngSubmit)="registerUser()">
+      <input type="text" placeholder="Username" [(ngModel)]="username" name="username" required />
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a routerLink="/login">Login</a></p>
+  </div>
 </div>
