@@ -1,0 +1,26 @@
+<div class="charts-wrapper">
+    <h2 class="charts-title">
+        📊 BMW Sales Analytics Dashboard
+    </h2>
+    <p class="charts-subtitle">
+        Visual insights of model distribution and yearly performance
+    </p>
+
+    <div class="charts-container">
+        <!-- Pie Chart Section -->
+        <div class="chart-card">
+            <h3 class="chart-heading">🚗 Model-wise Sales Distribution</h3>
+            <hr class="chart-divider" />
+            <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="pieChartType">
+            </canvas>
+        </div>
+
+        <!-- Line Chart Section -->
+        <div class="chart-card">
+            <h3 class="chart-heading">📈 Year-wise Units Sold Trend</h3>
+            <hr class="chart-divider" />
+            <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType">
+            </canvas>
+        </div>
+    </div>
+</div>

@@ -4,34 +4,35 @@
         <h2>BMW Sales Dashboard</h2>
     </div>
 
+    <!-- ✅ FORM SECTION -->
     <form (ngSubmit)="addOrUpdateSale()" class="sales-form">
         <div class="form-row">
-            <label for="model">Model:</label>
-            <input type="text" id="model" [(ngModel)]="sale.model" name="model" required />
+            <label>Model:</label>
+            <input type="text" [(ngModel)]="sale.model" name="model" required />
         </div>
         <div class="form-row">
-            <label for="year">Year:</label>
-            <input type="number" id="year" [(ngModel)]="sale.year" name="year" required />
+            <label>Year:</label>
+            <input type="number" [(ngModel)]="sale.year" name="year" required />
         </div>
         <div class="form-row">
-            <label for="price">Price:</label>
-            <input type="number" id="price" [(ngModel)]="sale.price" name="price" required />
+            <label>Price:</label>
+            <input type="number" [(ngModel)]="sale.price" name="price" required />
         </div>
         <div class="form-row">
-            <label for="unitsSold">Units Sold:</label>
-            <input type="number" id="unitsSold" [(ngModel)]="sale.unitsSold" name="unitsSold" required />
+            <label>Units Sold:</label>
+            <input type="number" [(ngModel)]="sale.unitsSold" name="unitsSold" required />
         </div>
 
         <div class="btn-group">
-            <button type="submit" class="btn-primary">{{ editing ? 'Update Sale' : 'Add Sale' }}</button>
+            <button type="submit" class="btn-primary">{{ editing ? 'Update' : 'Add' }}</button>
             <button type="button" class="btn-secondary" (click)="resetForm()">Clear</button>
         </div>
     </form>
 
     <hr />
 
+    <!-- ✅ TABLE SECTION -->
     <h3>Sales Records</h3>
-
     <table class="sales-table">
         <thead>
             <tr>
@@ -49,9 +50,9 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.model }}</td>
                 <td>{{ item.year }}</td>
-                <td>{{ item.price | number:'1.0-0' }}</td>
+                <td>{{ item.price | number }}</td>
                 <td>{{ item.unitsSold }}</td>
-                <td>{{ item.price * item.unitsSold | number:'1.0-0' }}</td>
+                <td>{{ item.price * item.unitsSold | number }}</td>
                 <td>
                     <button class="btn-edit" (click)="editSale(item)">Edit</button>
                     <button class="btn-delete" (click)="deleteSale(item.id!)">Delete</button>
@@ -59,4 +60,13 @@
             </tr>
         </tbody>
     </table>
+
+    <hr />
+
+    <!-- ✅ REUSABLE CHART COMPONENT -->
+    <app-bmw-sales-charts [salesData]="sales"></app-bmw-sales-charts>
+
+    <!-- <app-bmw-sales-table></app-bmw-sales-table>
+    <app-bmw-sales-charts></app-bmw-sales-charts> -->
+
 </div>
