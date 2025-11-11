@@ -1,33 +1,60 @@
-<div class="container">
-    <h2>🏎️ BMW Showroom Sales</h2>
-
-    <div class="add-form">
-        <input [(ngModel)]="newSale.model_name" placeholder="Model Name" />
-        <input [(ngModel)]="newSale.year" type="number" placeholder="Year" />
-        <input [(ngModel)]="newSale.units_sold" type="number" placeholder="Units Sold" />
-        <input [(ngModel)]="newSale.revenue" type="number" placeholder="Revenue" />
-        <button (click)="addSale()">Add</button>
+<div class="bmw-sales-container">
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="BMW Logo" class="logo" />
+        <h2>BMW Sales Dashboard</h2>
     </div>
 
-    <table>
+    <form (ngSubmit)="addOrUpdateSale()" class="sales-form">
+        <div class="form-row">
+            <label for="model">Model:</label>
+            <input type="text" id="model" [(ngModel)]="sale.model" name="model" required />
+        </div>
+        <div class="form-row">
+            <label for="year">Year:</label>
+            <input type="number" id="year" [(ngModel)]="sale.year" name="year" required />
+        </div>
+        <div class="form-row">
+            <label for="price">Price:</label>
+            <input type="number" id="price" [(ngModel)]="sale.price" name="price" required />
+        </div>
+        <div class="form-row">
+            <label for="unitsSold">Units Sold:</label>
+            <input type="number" id="unitsSold" [(ngModel)]="sale.unitsSold" name="unitsSold" required />
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-primary">{{ editing ? 'Update Sale' : 'Add Sale' }}</button>
+            <button type="button" class="btn-secondary" (click)="resetForm()">Clear</button>
+        </div>
+    </form>
+
+    <hr />
+
+    <h3>Sales Records</h3>
+
+    <table class="sales-table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Model</th>
                 <th>Year</th>
+                <th>Price (₹)</th>
                 <th>Units Sold</th>
-                <th>Revenue ($)</th>
+                <th>Total Revenue (₹)</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let sale of sales">
-                <td><input [(ngModel)]="sale.model_name" /></td>
-                <td><input [(ngModel)]="sale.year" type="number" /></td>
-                <td><input [(ngModel)]="sale.units_sold" type="number" /></td>
-                <td><input [(ngModel)]="sale.revenue" type="number" /></td>
+            <tr *ngFor="let item of sales">
+                <td>{{ item.id }}</td>
+                <td>{{ item.model }}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.price | number:'1.0-0' }}</td>
+                <td>{{ item.unitsSold }}</td>
+                <td>{{ item.price * item.unitsSold | number:'1.0-0' }}</td>
                 <td>
-                    <button (click)="updateSale(sale)">💾 Save</button>
-                    <button (click)="deleteSale(sale.id!)">🗑️ Delete</button>
+                    <button class="btn-edit" (click)="editSale(item)">Edit</button>
+                    <button class="btn-delete" (click)="deleteSale(item.id!)">Delete</button>
                 </td>
             </tr>
         </tbody>

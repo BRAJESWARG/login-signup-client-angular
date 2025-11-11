@@ -1,64 +1,119 @@
-.container {
+.bmw-sales-container {
     max-width: 900px;
     margin: 30px auto;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.bmw-logo {
+    width: 60px;
+    height: 60px;
 }
 
 h2 {
-    color: #0033a0;
-    text-align: center;
+    color: #003366;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sales-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 30px;
     margin-bottom: 20px;
 }
 
-.add-form {
+.form-row {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 20px;
+    flex-direction: column;
 }
 
-.add-form input {
-    padding: 6px;
-    width: 20%;
+.form-row label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-row input {
+    padding: 8px 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    font-size: 14px;
 }
 
-.add-form button {
-    background-color: #0033a0;
-    color: white;
+.btn-group {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #0047ab;
+    color: #fff;
+    padding: 8px 18px;
     border: none;
-    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    background-color: #999;
+    color: #fff;
+    padding: 8px 18px;
+    border: none;
     border-radius: 6px;
     cursor: pointer;
 }
 
-.add-form button:hover {
-    background-color: #0056ff;
-}
-
-table {
+.sales-table {
     width: 100%;
     border-collapse: collapse;
-}
-
-table th,
-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
+    margin-top: 20px;
     text-align: center;
 }
 
-table input {
-    width: 90%;
-    padding: 4px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.sales-table th {
+    background-color: #003366;
+    color: #fff;
+    padding: 10px;
 }
 
-button {
-    margin: 2px;
+.sales-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
 }
