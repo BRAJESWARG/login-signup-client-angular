@@ -1,7 +1,7 @@
 <nav class="navbar">
     <a routerLink="/home" *ngIf="isLoggedIn">Home</a>
     <a routerLink="/bmw-sales" *ngIf="isLoggedIn">
-        <!-- <img src="../assets/bmw-m-logo-png_seeklogo-278503.png" height="50px" width="50px" alt="BMW Logo"> -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="BMW Logo" class="bmw-logo" />
         Bayerische Motoren Werke AG
     </a> <!-- 👈 show only after login -->
     <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
