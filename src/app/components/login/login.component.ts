@@ -1,44 +1,29 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  username = '';
-  password = '';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private appComponent: AppComponent // 👈 inject root component
-  ) { }
+  email = "";
+  password = "";
+  error = "";
 
-  onLogin() {
-    this.http.post<any>('http://localhost:8040/auth/login', {
-      username: this.username,
-      password: this.password
-    }).subscribe({
-      next: (res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          alert('✅ Login successful!');
+  constructor(private auth: AuthService, private router: Router) { }
 
-          // ✅ Redirect to home
-          this.router.navigate(['/home']).then(() => {
-            this.appComponent.refreshNavbar(); // 👈 updates navbar immediately
-          });
-        } else {
-          alert('❌ Login failed: No token received');
-        }
+  login() {
+    const data = { email: this.email, password: this.password };
+
+    this.auth.login(data).subscribe({
+      next: (res: any) => {
+        localStorage.setItem("token", res.token);
+        this.router.navigate(['/']);
       },
-      error: (err) => {
-        console.error('❌ Login failed:', err);
-        alert('Invalid username or password!');
+      error: (_err: any) => {
+        this.error = "Invalid credentials!";
       }
     });
   }

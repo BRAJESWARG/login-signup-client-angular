@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  register(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { username, password });
+  // FIXED LOGIN: 1 argument only
+  login(data: { email: string; password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/login`, data);
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password });
+  // FIXED SIGNUP: now added properly
+  signup(data: { name: string; email: string; password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/register`, data);
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem("token");
   }
 }

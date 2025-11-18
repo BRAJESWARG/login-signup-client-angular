@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
 
@@ -13,7 +13,12 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BmwSalesComponent } from './components/bmw-sales/bmw-sales.component';
 import { BmwSalesChartsComponent } from './components/bmw-sales-charts/bmw-sales-charts.component';
+
 import { AuthGuard } from './auth.guard';
+
+// ⬇️ NEW — Import your JWT Interceptor
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +38,13 @@ import { AuthGuard } from './auth.guard';
     AppRoutingModule,
     NgChartsModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+
+    // ⬇️ NEW — Register JWT interceptor
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

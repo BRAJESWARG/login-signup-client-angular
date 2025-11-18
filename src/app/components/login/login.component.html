@@ -1,13 +1,10 @@
-<div class="container">
+<div class="login-container">
   <h2>Login</h2>
-  <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-    <input type="text" name="username" [(ngModel)]="username" placeholder="Username" required />
-    <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required />
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
-  </form>
 
-  <p>
-    Don't have an account?
-    <a routerLink="/signup">Register here</a>
-  </p>
+  <input type="email" [(ngModel)]="email" placeholder="Email">
+  <input type="password" [(ngModel)]="password" placeholder="Password">
+
+  <button (click)="login()">Login</button>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
 </div>

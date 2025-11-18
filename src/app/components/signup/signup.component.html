@@ -1,11 +1,12 @@
-<div class="container">
-  <div class="card">
-    <h2>Create Account</h2>
-    <form (ngSubmit)="registerUser()">
-      <input type="text" placeholder="Username" [(ngModel)]="username" name="username" required />
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-      <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a routerLink="/login">Login</a></p>
-  </div>
+<div class="signup-container">
+  <h2>Create Account</h2>
+
+  <input type="text" [(ngModel)]="name" placeholder="Full Name">
+  <input type="email" [(ngModel)]="email" placeholder="Email">
+  <input type="password" [(ngModel)]="password" placeholder="Password">
+  <input type="password" [(ngModel)]="confirmPassword" placeholder="Confirm Password">
+
+  <button (click)="signup()">Sign Up</button>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
 </div>

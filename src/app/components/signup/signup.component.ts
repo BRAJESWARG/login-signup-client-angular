@@ -1,30 +1,39 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  templateUrl: './signup.component.html'
 })
 export class SignupComponent {
-  username: string = '';
-  password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  name = "";
+  email = "";
+  password = "";
+  confirmPassword = "";
+  error = "";
 
-  registerUser() {
-    this.http.post<any>('http://localhost:8040/auth/register', {   // 👈 FIXED URL
-      username: this.username,
+  constructor(private auth: AuthService, private router: Router) { }
+
+  signup() {
+    if (this.password !== this.confirmPassword) {
+      this.error = "Passwords do not match!";
+      return;
+    }
+
+    const data = {
+      name: this.name,
+      email: this.email,
       password: this.password
-    }).subscribe({
-      next: (res) => {
-        alert('✅ Registration successful! Please login.');
+    };
+
+    this.auth.signup(data).subscribe({
+      next: (_res: any) => {
         this.router.navigate(['/login']);
       },
-      error: (err) => {
-        console.error('❌ Registration failed:', err);
-        alert('Registration failed. Please try again.');
+      error: (_err: any) => {
+        this.error = "Signup failed!";
       }
     });
   }
