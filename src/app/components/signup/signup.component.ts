@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,32 +7,29 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
-  name = "";
-  email = "";
-  password = "";
-  confirmPassword = "";
-  error = "";
+  username: string = '';
+  email: string = '';
+  password: string = '';
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService) { }
 
   signup() {
-    if (this.password !== this.confirmPassword) {
-      this.error = "Passwords do not match!";
-      return;
-    }
-
-    const data = {
-      name: this.name,
+    const payload = {
+      username: this.username,
       email: this.email,
       password: this.password
     };
 
-    this.auth.signup(data).subscribe({
-      next: (_res: any) => {
-        this.router.navigate(['/login']);
+    console.log("Sending signup payload:", payload);
+
+    this.auth.register(payload).subscribe({
+      next: (res: any) => {
+        console.log("SIGNUP SUCCESS:", res);
+        alert("Signup successful!");
       },
-      error: (_err: any) => {
-        this.error = "Signup failed!";
+      error: (err) => {
+        console.error("SIGNUP ERROR:", err);
+        alert("Signup failed!");
       }
     });
   }

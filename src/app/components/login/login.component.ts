@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +7,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  email = "";
-  password = "";
-  error = "";
+  email: string = '';
+  password: string = '';
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService) { }
 
   login() {
-    const data = { email: this.email, password: this.password };
+    const payload = {
+      email: this.email,
+      password: this.password
+    };
 
-    this.auth.login(data).subscribe({
+    console.log("Sending login payload:", payload);
+
+    this.auth.login(payload).subscribe({
       next: (res: any) => {
-        localStorage.setItem("token", res.token);
-        this.router.navigate(['/']);
+        console.log("LOGIN SUCCESS:", res);
+        alert("Login successful!");
       },
-      error: (_err: any) => {
-        this.error = "Invalid credentials!";
+      error: (err) => {
+        console.error("LOGIN ERROR:", err);
+        alert("Login failed: " + err.status);
       }
     });
   }
